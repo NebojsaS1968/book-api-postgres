@@ -9,9 +9,12 @@ const {
   deleteBookById,
   updateBookById,
   addBook,
+  getFilteredBooks,
 } = booksControl;
 
 router.route("/").get(getAllBooks).post(addBook).delete(deleteAllBooks);
+
+router.route("/filter").get(getFilteredBooks);
 
 router
   .route("/:id")
