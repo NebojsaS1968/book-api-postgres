@@ -13,4 +13,22 @@ app.use(express.json());
 const books = require("./routes/books");
 app.use("/api/v1/books", books);
 
+// ERRORS
+// Error catch for non-existent endpoints
+app.use((req, res, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  next(error); // passing error to the handler below
+});
+
+// Error handler
+app.use((error, req, res, next) => {
+  res.status(error.status || 500).send({
+    error: {
+      status: error.status || 500,
+      message: error.message || "Internal server error",
+    },
+  });
+});
+
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
