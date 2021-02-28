@@ -25,33 +25,22 @@ const AllBooksTable = () => {
       <table className="table table-striped table-dark table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">Year of Publish</th>
-            {/* <th scope="col">Ratings</th> */}
-            {/* <th scope="col">Price</th> */}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row"></th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {books &&
+            books.map((book) => {
+              return (
+                <tr key={book.id}>
+                  <td>{book.title}</td>
+                  <td>{book.author}</td>
+                  <td>{book.release_date}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
