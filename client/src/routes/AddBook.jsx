@@ -1,22 +1,28 @@
 import React, { useState, useContext } from "react";
 import Navbar from "../components/Navbar";
 import Books from "../apis/Books";
+import { BooksContext } from "../context/BooksContext";
 
 const AddBook = () => {
+  const { addBook } = useContext(BooksContext);
+
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [year, setYear] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await Books.post("/", {
         title,
         author,
         release_date: year,
       });
-      console.log(response);
+      addBook(response.data.data.newBook);
+      setTitle("");
+      setAuthor("");
+      setYear("");
+      window.location = "/books";
     } catch (err) {
       console.log(err);
     }
