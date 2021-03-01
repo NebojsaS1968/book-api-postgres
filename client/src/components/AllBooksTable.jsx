@@ -20,6 +20,20 @@ const AllBooksTable = () => {
     fetchData();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await Books.delete(`/${id}`);
+      console.log(response);
+      setBooks(
+        books.filter((book) => {
+          return book.id !== id;
+        })
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <table className="table table-striped table-dark table-hover">
@@ -28,6 +42,7 @@ const AllBooksTable = () => {
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">Year of Publish</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +55,17 @@ const AllBooksTable = () => {
                   </td>
                   <td>{book.author}</td>
                   <td>{book.release_date}</td>
+                  <td>
+                    <button className="btn btn-warning">Update</button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(book.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
             })}
