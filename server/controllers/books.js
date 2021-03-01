@@ -94,6 +94,7 @@ const getBookById = async (req, res, next) => {
   });
 };
 
+// Add Book
 const addBook = async (req, res, next) => {
   const title = req.body.title;
   const author = req.body.author;
@@ -112,6 +113,7 @@ const addBook = async (req, res, next) => {
   });
 };
 
+// Delete Book
 const deleteBookById = async (req, res, next) => {
   const { id } = req.params;
   db.query("DELETE FROM book WHERE id = $1", [id]);
@@ -121,6 +123,7 @@ const deleteBookById = async (req, res, next) => {
   });
 };
 
+// Delete All Books
 const deleteAllBooks = async (req, res, next) => {
   db.query("DELETE FROM book");
 
@@ -170,6 +173,7 @@ const updateBookById = async (req, res, next) => {
   });
 };
 
+// Get Filter
 const getFilteredBooks = async (req, res, next) => {
   const { author, year } = req.query;
 
