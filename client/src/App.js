@@ -4,6 +4,7 @@ import UpdateBook from "./routes/UpdateBook.jsx";
 import BookDetails from "./routes/BookDetails.jsx";
 import AllBooks from "./routes/AllBooks.jsx";
 import About from "./routes/About";
+import AddBook from "./routes/AddBook";
 import { BooksContextProvider } from "./context/BooksContext.js";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/books/:id/update" component={UpdateBook} />
             <Route exact path="/books" component={AllBooks} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/add" component={AddBook} />
           </Switch>
         </Router>
       </div>

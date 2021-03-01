@@ -35,7 +35,9 @@ const AllBooksTable = () => {
             books.map((book) => {
               return (
                 <tr key={book.id}>
-                  <td>{book.title}</td>
+                  <td>
+                    <a href={`/books/${book.id}`}>{book.title}</a>
+                  </td>
                   <td>{book.author}</td>
                   <td>{book.release_date}</td>
                 </tr>
