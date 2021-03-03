@@ -32,6 +32,8 @@ const AddBook = () => {
     <div>
       <Navbar />
       <br />
+      <h1 className="text-center">Add a book</h1>
+      <br />
       <div className="container">
         <form action="" className="needs-validation" onSubmit={handleSubmit}>
           <input
