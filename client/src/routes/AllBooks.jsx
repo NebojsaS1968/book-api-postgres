@@ -6,7 +6,20 @@ const AllBooks = () => {
   return (
     <div>
       <Navbar />
-      <h1>All books</h1>
+      <br />
+      <h1 className="text-center">All books</h1>
+      <div className="form-group float-right mr-5">
+        <label htmlFor="sort">Sort by:</label>
+        <select className="form-control" id="sort">
+          <option value="asc">Title</option>
+          <option value="asc">Author</option>
+          <option value="asc">Release Date</option>
+        </select>
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="container">
         <AllBooksTable />
       </div>
