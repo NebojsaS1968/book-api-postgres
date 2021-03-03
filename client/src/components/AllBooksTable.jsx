@@ -1,10 +1,14 @@
 import React, { useEffect, useContext } from "react";
 import Books from "../apis/Books";
 import { BooksContext } from "../context/BooksContext";
+import { useHistory } from "react-router-dom";
 
 const AllBooksTable = () => {
   // useContext is used to get you context API to work
   const { books, setBooks } = useContext(BooksContext);
+
+  // useHistory
+  const history = useHistory();
 
   // useEffect is used to load data before page rendering. It does not return anything, it need another method inside to return it for her.
   useEffect(() => {
@@ -20,6 +24,7 @@ const AllBooksTable = () => {
     fetchData();
   }, []);
 
+  // DELETE BTN
   const handleDelete = async (id) => {
     try {
       const response = await Books.delete(`/${id}`);
@@ -32,6 +37,11 @@ const AllBooksTable = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  // UPDATE BTN
+  const handleUpdate = (id) => {
+    history.push(`/books/${id}/update`);
   };
 
   return (
@@ -56,7 +66,12 @@ const AllBooksTable = () => {
                   <td>{book.author}</td>
                   <td>{book.release_date}</td>
                   <td>
-                    <button className="btn btn-warning">Update</button>
+                    <button
+                      onClick={() => handleUpdate(book.id)}
+                      className="btn btn-warning"
+                    >
+                      Update
+                    </button>
                   </td>
                   <td>
                     <button
