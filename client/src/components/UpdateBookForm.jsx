@@ -4,7 +4,7 @@ import Books from "../apis/Books";
 
 const UpdateBookForm = () => {
   const { id } = useParams();
-  const history = useHistory();
+  let history = useHistory();
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
