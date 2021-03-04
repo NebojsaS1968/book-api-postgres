@@ -25,7 +25,8 @@ const AllBooksTable = () => {
   }, []);
 
   // DELETE BTN
-  const handleDelete = async (id) => {
+  const handleDelete = async (e, id) => {
+    e.stopPropagation();
     try {
       const response = await Books.delete(`/${id}`);
       console.log(response);
@@ -40,8 +41,14 @@ const AllBooksTable = () => {
   };
 
   // UPDATE BTN
-  const handleUpdate = (id) => {
+  const handleUpdate = (e, id) => {
+    e.stopPropagation();
     history.push(`/books/${id}/update`);
+  };
+
+  // GO TO DETAILS PAGE FOR CLICKED BOOK
+  const handleOneBook = (id) => {
+    history.push(`/books/${id}`);
   };
 
   return (
@@ -59,7 +66,7 @@ const AllBooksTable = () => {
           {books &&
             books.map((book) => {
               return (
-                <tr key={book.id}>
+                <tr key={book.id} onClick={() => handleOneBook(book.id)}>
                   <td>
                     <a href={`/books/${book.id}`}>{book.title}</a>
                   </td>
@@ -67,7 +74,7 @@ const AllBooksTable = () => {
                   <td>{book.release_date}</td>
                   <td>
                     <button
-                      onClick={() => handleUpdate(book.id)}
+                      onClick={(e) => handleUpdate(e, book.id)}
                       className="btn btn-warning"
                     >
                       Update
@@ -75,7 +82,7 @@ const AllBooksTable = () => {
                   </td>
                   <td>
                     <button
-                      onClick={() => handleDelete(book.id)}
+                      onClick={(e) => handleDelete(e, book.id)}
                       className="btn btn-danger"
                     >
                       Delete
