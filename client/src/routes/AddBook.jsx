@@ -4,7 +4,7 @@ import Books from "../apis/Books";
 import { BooksContext } from "../context/BooksContext";
 
 const AddBook = () => {
-  const { addBook } = useContext(BooksContext);
+  const { addBook, isLight } = useContext(BooksContext);
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -29,7 +29,7 @@ const AddBook = () => {
   };
 
   return (
-    <div>
+    <div className={isLight ? "lightTheme" : "darkTheme"}>
       <Navbar />
       <br />
       <h1 className="text-center">Add a book</h1>

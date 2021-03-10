@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { BooksContext } from "../context/BooksContext";
 
 const Navbar = () => {
+  const { toggle } = useContext(BooksContext);
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <a className="navbar-brand" href="#">
           Books
         </a>
@@ -35,6 +38,12 @@ const Navbar = () => {
             <a className="nav-item nav-link" href="#">
               Login
             </a>
+          </div>
+
+          <div className="navbar-nav ml-auto">
+            <button onClick={toggle} className="nav-item btn btn-primary">
+              Toggle Theme
+            </button>
           </div>
         </div>
       </nav>

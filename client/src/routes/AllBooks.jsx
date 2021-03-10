@@ -6,9 +6,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { BooksContext } from "../context/BooksContext";
 
 const AllBooks = (props) => {
-  const search = useLocation().search;
-  let history = useHistory();
-  const { books, setBooks } = useContext(BooksContext);
+  const { books, setBooks, isLight } = useContext(BooksContext);
 
   const changeOptions = async () => {
     const select = document.getElementById("sort");
@@ -37,7 +35,7 @@ const AllBooks = (props) => {
   };
 
   return (
-    <div>
+    <div className={isLight ? "lightTheme" : "darkTheme"}>
       <Navbar />
       <br />
       <h1 className="text-center">All books</h1>
