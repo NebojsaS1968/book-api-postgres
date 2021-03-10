@@ -1,0 +1,15 @@
+body > #root {
+  height: 100vh;
+}
+
+.lightTheme {
+  background-color: white;
+  height: max-content;
+  color: black;
+}
+
+.darkTheme {
+  background-color: black;
+  height: 100vh;
+  color: snow;
+}
