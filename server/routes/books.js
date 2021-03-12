@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const booksControl = require("../controllers/books");
 
+const { cache } = require("../middlewares/cache");
+
 const {
   getAllBooks,
   getBookById,
@@ -12,7 +14,7 @@ const {
   getFilteredBooks,
 } = booksControl;
 
-router.route("/").get(getAllBooks).post(addBook).delete(deleteAllBooks);
+router.route("/").get(cache, getAllBooks).post(addBook).delete(deleteAllBooks);
 
 router.route("/filter").get(getFilteredBooks);
 
