@@ -1,7 +1,13 @@
 const db = require("../db/index");
+const redis = require("redis");
+const REDIS_PORT = process.env.REDIS_PORT || 6379;
+
+// Setting redis client
+const client = redis.createClient(REDIS_PORT);
 
 const getAllBooks = async (req, res, next) => {
   const { date, title, author } = req.query;
+
   // SORT BY REL_DATE
   if (date === "asc") {
     const result = await db.query(
@@ -70,7 +76,12 @@ const getAllBooks = async (req, res, next) => {
   }
 
   // NO QUERY PARAMS || DEFAULT
+  console.log("Fetching data ...");
   const result = await db.query("SELECT * FROM book");
+  const redis_key = "books";
+  const redis_value = JSON.stringify(result.rows);
+  client.setex(redis_key, 3600, redis_value);
+
   res.status(200).json({
     status: 200,
     results: result.rows.length,
@@ -83,9 +94,7 @@ const getAllBooks = async (req, res, next) => {
 const getBookById = async (req, res, next) => {
   const { id } = req.params;
   const result = await db.query("SELECT * FROM book WHERE id = $1", [id]);
-  // TO DO
-  // need to check if database contains an id put into the URL by looping through all rows and pulling the id value and compare / if no id throw an error
-  // TO DO
+
   res.status(200).json({
     status: 200,
     data: {
